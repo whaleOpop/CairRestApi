@@ -7,6 +7,7 @@ import lombok.Generated;
 
 @Entity
 @Data
+@Table(name="group")
 public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id

@@ -12,7 +12,9 @@ public class Teacher {
     private Long id;
     private String fio;
     private String email;
+    @Column(name = "login")
     private String login;
+    @Column(name = "password")
     private String password;
     private String github;
     private String photo;

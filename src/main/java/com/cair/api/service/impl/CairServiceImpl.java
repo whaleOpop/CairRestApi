@@ -6,6 +6,7 @@ import com.cair.api.repository.TeacherRepository;
 import com.cair.api.service.CairService;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class CairServiceImpl implements CairService {
     private TeacherRepository teacherRepository;
@@ -16,8 +17,12 @@ public class CairServiceImpl implements CairService {
 
     @Override
     public Teacher createTeacher(TeacherDto teacherDto) {
-        Teacher teacher = mapTeacher(teacherDto);
-        return teacherRepository.save(teacher);
+
+        if (teacherRepository.findByLogin(teacherDto.getLogin()).size() == 0) {
+            Teacher teacher = mapTeacher(teacherDto);
+            return teacherRepository.save(teacher);
+        }
+        return null;
     }
 
     @Override
@@ -27,6 +32,7 @@ public class CairServiceImpl implements CairService {
         return teacherRepository.save(teacher);
     }
 
+
     @Override
     public Teacher getByIdTeacher(Long teacherId) {
         return teacherRepository.findById(teacherId).get();
@@ -35,6 +41,12 @@ public class CairServiceImpl implements CairService {
     @Override
     public void deleteTeacherById(Long teacherId) {
         teacherRepository.deleteById(teacherId);
+    }
+
+    @Override
+    public Teacher getByLoginTeacher(String teacherLogin) {
+        return teacherRepository.findByLogin(teacherLogin).get(0);
+
     }
 
     private Teacher mapTeacher(TeacherDto dto) {

@@ -12,7 +12,9 @@ public class Student {
     private Long id;
     private String fio;
     private String email;
+    @Column(name = "login")
     private String login;
+    @Column(name = "password")
     private String password;
     private Integer scores;
     private String github;
